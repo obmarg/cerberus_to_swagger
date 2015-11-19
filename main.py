@@ -17,12 +17,12 @@ def cerberus_type_to_swagger_types(cerberus_type, top_level_name):
         type_ = field_data['type']
         if field_data.get('required', False):
             required.append(key)
-        if type_ in ('string', 'boolean'):
+        if type_ in ('string', 'boolean', 'integer'):
             properties[key] = {'type': type_}
         elif type_ == 'date':
             properties[key] = {'type': 'string', 'format': 'date'}
         elif type_ == 'list':
-            if field_data['schema']['type'] in ('string', 'boolean'):
+            if field_data['schema']['type'] in ('string', 'boolean', 'integer'):
                 element_data = {'type': field_data['schema']['type']}
             elif field_data['schema']['type'] == 'date':
                 element_data = {'type': 'string', 'format': 'date'}
